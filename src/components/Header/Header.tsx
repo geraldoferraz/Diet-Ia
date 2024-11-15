@@ -23,7 +23,7 @@ export function Header(){
                         Home
                     </Button>
 
-                    <Button className="flex  items-center gap-3 text-base">
+                    <Button className="flex items-center gap-3 text-base font-semibold">
                         Veja as estatísticas
                     </Button>
                 </div>

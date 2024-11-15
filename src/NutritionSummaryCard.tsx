@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { Pie, PieChart, Label } from "recharts"
+import { Loader } from "lucide-react";
 
 import {
 Card,
@@ -41,7 +42,12 @@ export function NutritionSummaryCard() {
     });
 
     if (isLoading) {
-        return <div>Carregando...</div>;
+        return (
+            <div className="flex flex-col items-center justify-center h-screen gap-2">
+                <Loader className="w-10 h-10 animate-spin" />
+                <span>Carregando...</span>
+            </div>
+        );
     }
 
     if (isError) {
@@ -92,7 +98,7 @@ export function NutritionSummaryCard() {
 
     return (
         <>
-            <Card className="flex flex-col items-center">
+            <Card className="flex flex-col items-center mt-12 mr-16 ml-16">
                 <CardHeader className="items-center pb-0">
                     <CardTitle>Resumo Nutricional</CardTitle>
                     <CardDescription>
@@ -100,10 +106,8 @@ export function NutritionSummaryCard() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col items-center gap-4">
-                    {/* Exibir o nome do alimento */}
-                    <h2 className="text-xl font-bold">{foodName}</h2>
 
-                    <div className="flex flex-row items-center gap-6">
+                    <div className="flex flex-row items-center gap-6 mt-2">
                         <div className="aspect-square max-h-[250px] flex-1">
                             <PieChart width={250} height={250}>
                                 <Pie
@@ -138,7 +142,17 @@ export function NutritionSummaryCard() {
                             </PieChart>
                         </div>
 
-                        <div className="flex flex-col gap-2 text-sm items-start">
+                        <div className="flex flex-col gap-2 text-sm items-start mt-6 mb-8">
+                            <div className="flex justify-between items-center gap-12">
+                                <div className="flex justify-between items-center gap-2">
+                                    <div
+                                        className="h-3 w-3 rounded-full bg-gray-500"
+                                        />
+                                    <span className="font-semibold">Alimento</span>
+                                </div>
+                                <span className="font-semibold">{foodName}</span>
+                            </div>
+                            <Separator className="mt-2 mb-2" />
                             {chartData.map((item) => (
                                 <div
                                     key={item.nutrient}
@@ -151,7 +165,7 @@ export function NutritionSummaryCard() {
                                         />
                                         <span className="font-semibold">{item.nutrient}</span>
                                     </div>
-                                    <span className="font-semibold text-base">
+                                    <span className="font-semibold">
                                         {item.percentage}g
                                     </span>
                                 </div>
@@ -164,7 +178,7 @@ export function NutritionSummaryCard() {
                                     <div className="h-3 w-3 rounded-full bg-pink-500" />
                                     <span className="font-semibold">Açúcar</span>
                                 </div>
-                                <span className="font-semibold text-base">{sugars}g</span>
+                                <span className="font-semibold">{sugars}g</span>
                             </div>
 
                             <div className="flex justify-between items-center w-full max-w-xs">
@@ -172,7 +186,7 @@ export function NutritionSummaryCard() {
                                     <div className="h-3 w-3 rounded-full bg-yellow-500" />
                                     <span className="font-semibold">Fibras</span>
                                 </div>
-                                <span className="font-semibold text-base">{fiber}g</span>
+                                <span className="font-semibold">{fiber}g</span>
                             </div>
 
                             <Separator className="mt-2 mb-2" />
@@ -181,7 +195,7 @@ export function NutritionSummaryCard() {
                                 <div className="h-3 w-3 rounded-full bg-gray-500" />
                                 <div className="flex items-center justify-between w-full gap-10">
                                     <span className="font-semibold">Calorias</span>
-                                    <span className="font-semibold text-base">
+                                    <span className="font-bold">
                                         {totalCalories} Kcal
                                     </span>
                                 </div>
