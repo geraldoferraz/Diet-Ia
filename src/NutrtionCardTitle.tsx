@@ -6,7 +6,7 @@ export function NutritionCardTitle(){
 
     return(
         <>
-            <Card className="mb-8">
+            <Card className="mb-8 mt-8">
                 <CardHeader>
                     <CardTitle className="flex justify-between items-center">
                         Estatísticas dos alimentos
